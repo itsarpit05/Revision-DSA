@@ -1,18 +1,23 @@
 class Solution {
 public:
-int M = 1e9+7;
-    long long pow(long long a, long long b){
-        if(b==0){
-            return 1;
+    const int mod= 1e9+7;
+    long long solve(long long x, long long n){
+        if(n==0) return 1;
+
+        if(n%2==0){
+            return solve((x*x)%mod, n/2);
         }
-        long long half = pow(a,b/2);
-        long long res = (half*half)%M;
-        if(b%2==1){
-            res = (res*a)%M;
+        else{
+            return (x*solve(x, n-1))%mod;
         }
-        return res;
-    }
+      }
     int countGoodNumbers(long long n) {
-        return (long long)pow(5,(n+1)/2)*pow(4,n/2)%M;
+        long long even=n/2+n%2;
+        long long odd=n/2;
+        long long first=solve(5,even);
+        long long second=solve(4,odd);
+
+        long long ans= ((first)*(second))%mod;
+        return ans;
     }
 };
