@@ -25,7 +25,6 @@ public:
         vector<int>valve;
         vector<int>res;
         res=inorder(root , valve);
-        sort(res.begin(),res.end());
         return res[k-1];
     }
 };
